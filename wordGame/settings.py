@@ -140,12 +140,22 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
  'allauth.account.auth_backends.AuthenticationBackend',
  )
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nathaniel.handan@gmail.com'
+EMAIL_HOST_PASSWORD = 'hiokgtfapvrowmtw'
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -158,3 +168,15 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
 django_heroku.settings(locals())
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
