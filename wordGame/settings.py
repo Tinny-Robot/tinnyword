@@ -12,18 +12,23 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ci#)z3%5k02k2s^umn639fvg4e9(1($12zpt2wt+=cz1y$4l^c'
+# SECRET_KEY = 'django-insecure-ci#)z3%5k02k2s^umn639fvg4e9(1($12zpt2wt+=cz1y$4l^c'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.43.62', 'tinnyword.herokuapp.com']
 
@@ -151,3 +156,5 @@ MEDIA_URL = '/media/'
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+
+django_heroku.settings(locals())

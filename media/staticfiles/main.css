@@ -1,0 +1,13 @@
+@font-face {
+			font-family: 'gwibble';
+   			/*src: url('gwibble.ttf') format('woff'),  Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   			src: url('gwibble.ttf') format('truetype');
+   		}
+.btn {
+	border:2px solid black ;
+	padding: 10px;
+}
+#sw {
+	background-color: red;
+	border-radius: 50%;
+}
