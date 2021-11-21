@@ -1,0 +1,73 @@
+{% extends 'game/base.html'%} {%load crispy_forms_tags %} {% block content%}
+<br>
+<style>
+    body{
+        background-color: white !important;
+        color: white;
+    }
+</style>
+
+<div class='container  ' style="">
+    <table><tr><td>
+        <img class="rounded-circle inline-block" src='{{ user.profile.image.url }} ' style="width: 100px; height:100px;"></td>
+        <td>
+        <h2 class='title' title="username" style="font-family:frost; font-weight: bolder;">{{ user.username.upper}}
+        </h2>
+        <p class="text-secondary">Name: {{user.first_name}} {{user.last_name}}</p>
+        <p class="text-secondary">Email: {{user.email}}</p>
+    </td></tr></table>
+</div>
+<br><br>
+<div class="container"><button type="button" class="btn btn-outline-success sm" style="border-radius: 30px;" id="modal" data-toggle="modal" data-target="#myModal">
+    <span class="spinner-grow spinner-grow-sm"></span>
+    <p>Update Profile</p>
+    </button>
+
+    <div class="modal custom fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="trackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <form method="POST" enctype='multipart/form-data' runat='server'>
+                            {% csrf_token %}
+                            <fieldset class="container form-group">
+                                <legend class="border-bottom mb-4">Profile Info</legend>
+                                {{ u_form|crispy }}
+                                <hr> {{ p_form|crispy }}
+                                <img src="#" id="blah" width="200"  alt="your image" />
+                                <div>
+                                    <button class="btn btn-outline-info" type='submit'>
+                                        Update
+                                    </button>
+                                </div>
+                            </fieldset>
+
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]){
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#id_image').change(function(){
+        readURL(this);
+    });
+</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}<center class='container'>
+<div class="container align-content-center">
+<video style="width:60vw;height: 40vw;" loop muted autoplay>
+  <source src="{% static 'welcom.mp4' %}" type="video/mp4">
+  <source src="{% static 'welcom.mp4' %}" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+</div>
+<p style="font-family: gwibble; font-size: 35px !important; color: ghostwhite; text-align: center;">Welcome
+  <p style="font-family: gwibble; font-size: 35px !important; color: ghostwhite; text-align: center; margin-top: -1em;">To 
+  <p style="font-family: gwibble; font-size: 50px !important; color: ghostwhite; text-align: center; margin-top: -1em;">Tinny Word Game</p><center>
+    <div class="container pt-3" style="cursor: alias; background-color: papayawhip; width:200px; height:auto; margin: 1em; border-radius: 30px;">
+      
+      {% if user.is_authenticated %}
+      <h2 style="font-family:frost;"><span style="color:red;">Hi</span> {{ user.username }} !</h2>
+      <a href="{% url 'play' %}"><button type="button" class="btn btn-warning" style="margin-bottom: 30px; font-family: gwibble; color:papayawhip;">Start</button></a>
+    {% else %}
+      <p style="font-family: whale;">You are not logged in</p>
+      <a href="{% url 'login' %}"><button type="button" class="btn btn-warning" style="margin-bottom: 30px; font-family: gwibble; color:papayawhip;">Login</button></a>
+    {% endif %}
+
+
+
+
+   </div>   <br>
+
+</center>
+<script type="text/javascript">
+  function start() {
+    // body...
+    {% if user.is_authenticated %}
+    window.location.href= "" 
+    console.log('start')
+  {% else %}
+    console.log('getat')
+    var list = '{{ word }}'
+
+    {% endif %}
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<p style="font-family: gwibble; font-size: 15vw !important; color: ghostwhite; text-align: center;">Welcome
+    <br>To 
+    <br>Chai Word Game</p><center>
+    <div class="container" style="cursor: alias; background-color: papayawhip; width:200px; height:100px; border-radius: 30px;">
+      <button type="button" class="btn btn-warning" style="margin: 30px; font-family: gwibble; color:papayawhip;" onclick="start()">Start</button>
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+<script type="text/javascript">
+  function start() {
+    // body...
+    {% if user.is_authenticated %}
+    window.location.href= "{% url 'login' %}" 
+    console.log('start')
+  {% else %}
+  window.location.href= "{% url 'login' %}"
+    console.log('getat')
+
+    {% endif %}
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,435 @@
+{%extends 'base.html' %}
+
+{% block title %}Play{% endblock %}
+
+{% block content %} <style type="text/css"> 
+  body{ margin: 0 !important; }
+  .c2{
+    border-radius: 10px;
+        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  }
+  .blink{
+    -webkit-animation-name: blk; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1.5s; /* Safari 4.0 - 8.0 */
+  animation-name: blk;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  }
+
+  /* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+  0%   {background-color: orange;}
+  25%  {background-color: white; width: 50vw; height: 10em;}
+  50%  {background-color: yellow;}  
+  75% {background-color: white; width: 50vw; height: 10em;}
+  100%   {background-color: orange;}
+}
+
+/* Standard syntax */
+@keyframes example {
+  0%   {background-color: brown;}
+  25%  {background-color: white; }
+  50%  {background-color: orange;}  
+  75% {background-color: white; }
+  100%   {background-color: brown;}
+}
+
+
+  @keyframes blk {
+  0% {opacity: 100%;}
+  33.67% {opacity: 20%;}
+  50% {opacity: 100%;}
+  83.33% {opacity: 20%;}
+  100% {opacity: 100%;}
+</style> 
+<w id='w'>
+<div class="row" style="background-color: orange; width: 100vw; height: 7em; margin:0 !important;"> 
+  <table> 
+    <tr> 
+      <td > 
+        <div  id='d1' class="c2" style="background-color:purple; width: 45vw; height:6em; margin:.5em ; border-radius:10px; padding: 0.2em; box-shadow: .2em .2em #000;" >
+          <img class="rounded-circle inline-block" src='{{ user.profile.image.url }}' style="width: 3em; height:3em;">
+          <span class="m-2"style="font-family:frost;letter-spacing: em  ; color: white; font-size:1.5em; ">
+            {{ user.username.upper}}
+          </span>
+          <div id="sc1" style=" text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;text-align: center; font-family: whale; font-size: 10vw; font-weight:bolder; color: white;">0</div>
+
+        </div>
+      </td>
+      <td >
+        <div id='d2' style="background-color:brown; width: 45vw; height: 6em;margin:.5em ; border-radius: 10px; padding: 0.2em; align-content: right;box-shadow: .2em .2em black;" >
+          <span class="m-2"style="font-family:frost;letter-spacing: em  ; color: white; font-size:1.5em; ">
+            {{ comp.username.upper}}
+          </span>
+          <img class="rounded-circle inline-block" src='{{ comp.profile.image.url }} ' style="width: 3em; height:3em; right: 0em;">
+          <div id="sc2" style="text-align: center; font-family: whale; font-size: 10vw; font-weight:bolder; color:white;text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;">0</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+
+  
+    <h2 id="vs0"style="position: relative; float: unsetss; border-radius: 50px; background-color:gray; width:1.5em; padding: .2em; text-align: center; font-family:gwibble; color: White; top: -4em; right: -44.5vw; box-shadow: .1em .1em black;">vs</h2>
+
+</div>
+  <div class="progress" style="border-radius: 0.5em; margin:1em; box-shadow:.2em .2em black;">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="prog" style="width:100%"></div>
+</div>
+<h3 id='lef' style="top: -1.5em; position:relative; background-color:#0d6efd; width: 1.4em; height: 1.4em; text-align: center; vertical-align: middle; font-family: whale; border-radius: 50%; color:white; " class="progress-bar-striped progress-bar-animated">30</h3>
+<center>
+    <div class="container" style="margin-top:-2em; width: 90%;" >
+      <div class="alert alert-danger" style="display: none; color: red;" id='notice'></div>
+      <div class="alert alert-secondary" style="display: none; color: darkorange;" id='notic'></div>  
+    
+      <h6 class="container text-white " style="font-family:whale; text-align: left; text-shadow: .1em .1em black;"> The Word is</h6>
+      <h2 id='word' class="container text-white " style="font-family:frost;letter-spacing: 0.1em; font-weight: bolder;text-shadow: .1em .1em black;"></h2>
+
+      <input placeholder="Try to make a word" type="text" name="User" class="form-control form-control-lg form-control-plaintext" id="User" disabled style="font:italic; font-family: whale; letter-spacing: 0.2em; padding-left: 0.2em; text-align: center; width: 80vw !important;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) "><i onclick="cls()" class="btn btn-danger m-2" >Clear</i>
+      <br>
+      <div class="container" id='inps'  style="cursor: alias; background-color: papayawhip; height:auto; border-radius: 30px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"></div>
+        <span class="btn btn-success btn-lg m-3" onclick="submit()">SUBMIT</span>
+      </div>
+  </center>
+<h1 style="font-family:whale;" id='qq'></h1>
+
+</w>
+  <script type="text/javascript">
+
+    var sec = 300;
+    var dig = 300;
+    var max = 0;
+    var dis = dig /10;
+    var player = 0
+    var u1 = 0
+    var u2 = 0
+
+    setInterval(moveProgress,100);
+    function as() {
+      // body...
+    
+      if (player %2 == 0) {
+        document.getElementById('d2').classList.remove('c2');
+        document.getElementById('d1').classList.add('c2');
+        document.getElementById('inps').innerHTML = ''  
+        creat()
+      }
+      else{
+        document.getElementById('d2').classList.add('c2');
+        document.getElementById('d1').classList.remove('c2');
+        document.getElementById('inps').innerHTML = '<center style="font-family:frost;"><h5 >{{comp.username.upper}} said <br></h5></div>    <div class="modal-body">        <h2 id=\'qw24\'></h2> <div class="modal-footer">      <button type="button" class="btn btn-success"  onclick="pst(\'a\')" >Accept</button>          <button type="button" class="btn btn-danger"  onclick="pst(\'c\')" >Challedge</button></center>'
+      ait()
+      console.log()
+      }
+    }
+
+    
+      
+    
+    function moveProgress(){
+      if (dig > max ){
+        dig -= 1;
+        sec = dig*100/300;
+      }
+      else{
+        pass();
+      }
+      if (dig >= 285){
+        document.getElementById('notice').style.display = 'none'
+        document.getElementById("prog").classList.remove('bg-danger')
+        document.getElementById("lef").classList.remove('bg-danger')
+        
+        document.getElementById("prog").classList.remove('blink')
+        document.getElementById("lef").classList.remove('blink')
+      }
+      else if (dig == 50){
+
+        document.getElementById("prog").classList.remove('bg-warning')
+        document.getElementById("lef").classList.remove('bg-warning')
+        document.getElementById("prog").classList.add('bg-danger')
+        document.getElementById("lef").classList.add('bg-danger')
+
+        document.getElementById("prog").classList.add('blink')
+        document.getElementById("lef").classList.add('blink')
+        // $("#prog").css({"background-color": "yellow !important" ,});
+      }
+      else if (dig == 100){
+        document.getElementById("prog").classList.add('bg-warning')
+        document.getElementById("lef").classList.add('bg-warning')
+        // $("#prog").css({"background-color": "yellow !important" ,});
+      }
+      document.getElementById("prog").style.width = sec + '%';
+      // getElementById("lef").innerHTML = dig/10;
+
+
+    }
+      
+    function distim(){
+      if (dis > max ){
+        dis -= 1;
+      }
+      else if (dis < 25)
+        document.getElementById('notic').style.display = 'none'
+
+      else{
+        pass();
+      }
+      document.getElementById("lef").innerHTML = dis;
+      // document.getElementById("er").innerHTML = dig/10;
+
+    }
+    setInterval(distim,1000)
+    
+
+
+    function cls() {
+      // body...
+      document.getElementById('User').value = ''
+      try{for (var w = 0; w <= word.length - 1; w++) {
+        document.getElementById(w).disabled = false
+        document.getElementById(w).style.visibility = 'visible'
+      }}
+      catch(err){
+
+      }
+    }
+  
+
+
+    Array.prototype.sample = function(){
+      return this[Math.floor(Math.random()*this.length)];
+    }
+    console.log('{{word}}');
+    var word ='{{word}}'
+   
+
+    document.getElementById('word').innerHTML = '{{word}}'
+    
+    function creat() {
+          // body...
+        
+    for (var i = 0; i <= word.length - 1; i++) {
+      var rndInt = randomIntFromInterval(-30, 30)
+      // console.log(rndInt)
+      document.getElementById('inps').innerHTML +='<button class="btn btn-warning btn-sm"  style="margin:10px;font-weight: bolder; transform: rotate('+rndInt+'deg); font-family:frost; color:white;box-shadow:.2em .2em #4C3A05" onclick="mine('+i+')" id='+i+'>'+ word[i] + '</button>' ; 
+    }
+  }
+  creat();
+  var wo 
+  var sword = []
+  sword.push(word)
+  function submit() {
+      // body...
+
+      wo = document.getElementById('User').value.toLowerCase()
+      console.log(wo) 
+      // document.getElementById('qq').innerHTML +=  wo+' '
+      cls()
+      if(wo =='') {
+        document.getElementById('notice').style.display = 'block'
+        document.getElementById('notice').innerHTML = 'Enter Input or wait for ur time to finish'
+        return}
+    else{
+      if (player %2 == 0) {
+        if (sword.includes(wo)) {
+          document.getElementById('notice').style.display = 'block'
+          document.getElementById('notice').innerHTML = wo.toUpperCase() +' has already been suggested'
+          return;
+        }
+        else{
+          var chal = ''
+          var cv = randomIntFromInterval(0, 100)
+          if (cword.includes(wo)){ chal = 'a'}
+          else if(cv % 4 == 0){
+            chal = 'c'
+          }
+          else{
+            chal = 'a'
+          }
+          chec(wo, chal)
+          player += 1
+          as()
+          
+          sec = 300;
+          dig = 300;
+          max = 0;
+          dis = dig /10;
+          console.log('o')
+          return;
+        }
+
+      }
+      else if (player == 4){
+        document.getElementById('w').innerHTML = '[Tinny]'
+      }
+      else if(player%2 ==1) {
+
+          player+=1
+          as()
+          sec = 300;
+          dig = 300;
+          max = 0;
+          dis = dig /10;   
+      }
+
+      }
+    }
+  var fg = ''
+
+    function ait() {
+      var cv = randomIntFromInterval(0, uu.length)
+      fg =document.getElementById('User').value = uu[cv]
+      uu.splice(cv, 1)
+      document.getElementById('qw24').innerHTML = fg.toUpperCase()
+      document.getElementById("myBtn").click(function(){
+          document.getElementById("myModal").modal();
+        });
+      
+    }
+    function pst(wh) {
+      sword.push(fg)
+      console.log()
+      if (wh == 'a') {
+        if(valid_list.includes(fg)){
+        u12 = fg.length
+        u2+= u12
+        }
+        else{
+        u12 = fg.length
+        u2+= u12
+        u1-=u12  
+        }
+        document.getElementById('notic').style.display = 'block'
+        document.getElementById('notic').innerHTML = 'You Accepted the Word'
+      }
+      else{
+        if(valid_list.includes(fg)){
+        u12 = fg.length
+        u2+= u12
+        u1-= u12
+
+        }
+        else{
+        u12 = fg.length
+        u2-= u12
+        u1+=u12  
+        }
+        document.getElementById('notic').style.display = 'block'
+        document.getElementById('notic').innerHTML = 'you Challedge the Word'
+      }
+    
+      document.getElementById('sc1').innerHTML = u1;
+      document.getElementById('sc2').innerHTML = u2;
+
+
+          player+=1
+          as()
+          cls()
+          sec = 300;
+          dig = 300;
+          max = 0;
+          dis = dig /10;
+    }
+    function ad() {
+      // body...
+      console.log()
+    }
+  function checAi(uu) {
+    console.log(uu)
+  }
+  var uu = {{ai|safe}}
+function getRandomSubarray(arr, size) {
+    var shuffled = arr.slice(0), i = arr.length, temp, index;
+    while (i--) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(0, size);
+}
+function arraysEqual(a, b) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length !== b.length) return false;
+
+  // If you don't care about the order of the elements inside
+  // the array, you should sort both arrays here.
+  // Please note that calling sort on an array will modify that array.
+  // you might want to clone your array first.
+
+  for (var i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+    function pass(){
+      player += 1
+      as()
+      sec = 300;
+      dig = 300;
+      max = 0;
+      dis = dig /10;
+      cls()
+    }
+    function chec(wo,chal){
+      // body...
+      var u12 = 0
+      sword.push(wo)
+      console.log(chal)
+      if (chal == 'a') {
+        if(valid_list.includes(wo)){
+        u12 = wo.length
+        u1+= u12
+        }
+        else{
+        u12 = wo.length
+        u1+= u12
+        u2-=u12  
+        }
+        document.getElementById('notic').style.display = 'block'
+        document.getElementById('notic').innerHTML = '{{ comp.username.upper}} Accepted the Word'
+      }
+      else{
+        if(valid_list.includes(wo)){
+        u12 = wo.length
+        u1+= u12
+        u2-= u12
+
+        }
+        else{
+        u12 = wo.length
+        u1-= u12
+        u2+=u12  
+        }
+        document.getElementById('notic').style.display = 'block'
+        document.getElementById('notic').innerHTML = '{{ comp.username.upper}} Challedge the Word'
+      }
+    
+      document.getElementById('sc1').innerHTML = u1;
+      document.getElementById('sc2').innerHTML = u2;
+    }
+    function mine(letter) {
+      // body...
+      document.getElementById('User').value += word[letter]
+      document.getElementById(letter).disabled = true
+      document.getElementById(letter).style.visibility = 'hidden'
+      }
+    function randomIntFromInterval(min, max) { // min and max included 
+     return Math.floor(Math.random() * (max - min + 1) + min) 
+    }
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    // some comments
+    }
+    else {
+    document.getElementById("bod").innerHTML='<h1 class="container" style="color:white;">Sorry this only works for mobile devices</h1><br><p class="container-fluid" style="color:white;"><span style="margin:20%; color:green; border: 1px solid white;">IF YOU ARE USING A MOBLILE DEVICE!!!</span>you are using an unsupported browser, upgrade browser to enjoy</p>';
+    }
+    
+
+</script>
+
+{% endblock %}
