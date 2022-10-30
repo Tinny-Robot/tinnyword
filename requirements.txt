@@ -10,7 +10,7 @@ cryptography==35.0.0
 Cython==0.29.17
 defusedxml==0.7.1
 dj-database-url==0.5.0
-Django==3.2.9
+Django
 django-allauth==0.45.0
 django-crispy-forms==1.13.0
 django-heroku==0.3.1
